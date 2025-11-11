@@ -1,0 +1,104 @@
+\useoutertheme[subsection=false]{miniframes}
+\useoutertheme{infolines}
+
+\definecolor{zuelsm}{HTML}{126BAE}
+\usecolortheme[named=zuelsm]{structure}
+
+% turn off the navigation symbols
+\setbeamertemplate{navigation symbols}{}
+
+% define useful layout lengths
+\newlength{\textmargin}
+\setlength{\textmargin}{10mm} % Left and right margin for main content
+\setbeamersize{text margin left=\textmargin,text margin right=\textmargin}
+\newlength{\titlehmargin}
+\setlength{\titlehmargin}{5mm} % Left and right margin for title and footline
+\newlength{\titlevmargin}
+\setlength{\titlevmargin}{1mm} % Top and bottom margin for title and footline
+\newlength{\fullpagewidth}
+\setlength{\fullpagewidth}{\dimexpr\textwidth+\textmargin+\textmargin\relax}
+
+% Calculate widths from heights for the logos
+\newlength{\oxfordlogowidth}
+\setlength{\oxfordlogowidth}{\dimexpr  10mm * 1024 / 1024 \relax}
+\newlength{\mathslogowidth}
+\setlength{\mathslogowidth}{\dimexpr 3mm * 591 / 77 \relax}
+
+
+%% Title slide formatting %%
+\setbeamertemplate{title page}{
+    \begin{picture}(0,0)
+        \put(-\textmargin, \dimexpr -\paperheight*6/10 \relax+15.5){%
+        \ifdim\paperwidth>400pt
+           \includegraphics[width=\paperwidth]{images/background-wide.jpg}
+        \else
+           \includegraphics[width=\paperwidth]{images/background.jpg}
+        \fi
+        }
+        \put(-\textmargin +7mm, -55pt){%
+            \begin{minipage}[b][4.5cm][t]{0.7\textwidth}
+                \raggedright
+                \color{white}
+                \usebeamerfont{title}
+                    {\inserttitle\\[0.9cm]}
+                \usebeamerfont{subtitle}
+                    {\sc\insertauthor\\[0.1cm]}
+                    {\it\insertinstitute\\[0.3cm]}
+                    {\insertdate}
+            \end{minipage}
+        }
+    \end{picture}
+}
+
+
+
+%% General slide frametitle %%
+\setbeamertemplate{frametitle}{%
+   \rlap{%
+     \begin{beamercolorbox}[sep=\titlevmargin,left,wd=\dimexpr\fullpagewidth-\titlehmargin*2+\titlevmargin*2\relax]{frametitle}%
+      \begin{minipage}{\dimexpr\fullpagewidth-\oxfordlogowidth-\titlehmargin*3-0.1cm\relax}%
+        \strut\insertframetitle\strut\par%
+      \end{minipage}%
+      \hspace{\titlehmargin}%
+      \begin{minipage}{\dimexpr\oxfordlogowidth+1mm\relax}%
+        \hfill
+        \vspace*{-4mm}
+        \includegraphics[width=\oxfordlogowidth]{images/zuel-logo.png}%
+      \end{minipage}%
+     \end{beamercolorbox}%
+   }%
+   \vspace{\dimexpr-\baselineskip+1ex\relax}%
+   \noindent\rlap{\hspace{-\textmargin}\hspace{\titlehmargin}\rule{\dimexpr\fullpagewidth-\titlehmargin*2\relax}{0.4pt}}%
+   \vspace{-0.6ex}%
+}
+
+%% General slide header %%
+%\setbeamercolor{section in head/foot}{bg=zuelsm!75, fg=white}
+\setbeamertemplate{headline}[miniframes theme]{
+  \begin{beamercolorbox}[wd=\paperwidth]{section in head/foot}
+    \insertnavigation{\paperwidth}
+  \end{beamercolorbox}
+}
+
+%% General slide footer %%
+\setbeamertemplate{footline}{%
+  \noindent\hspace{\titlehmargin}{\color{zuelsm}\rule{\dimexpr\fullpagewidth-\titlehmargin*2\relax}{0.4pt}}\par%
+  \vspace{\titlevmargin}%
+  \leavevmode%
+  \noindent\hspace{\dimexpr\titlehmargin-\titlevmargin\relax}%
+  \begin{beamercolorbox}[sep=\titlevmargin,wd=\dimexpr\fullpagewidth-\titlehmargin*2+\titlevmargin*2\relax]{footline}%
+    \begin{minipage}{\dimexpr\mathslogowidth+1pt\relax}%
+      \includegraphics[width=\mathslogowidth]{images/zuel-S&M-logo.png}%
+    \end{minipage}%
+    \hfill%
+    {\usebeamercolor[fg]{title in head/foot}\usebeamerfont{title in head/foot}\insertshorttitle}%
+    \hfill%
+    {\usebeamercolor[fg]{date in head/foot}\usebeamerfont{date in head/foot}\insertshortdate{}}%
+    \hfill%
+    {\usebeamercolor[fg]{page number in head/foot}\usebeamerfont{page number in head/foot}\color{zuelsm}\usebeamertemplate{page number in head/foot}}%
+  \end{beamercolorbox}
+  \vspace{\titlevmargin}%
+}
+
+\addtobeamertemplate{headline}{}{\vspace{3ex}} % 增加下方间距
+\addtobeamertemplate{frametitle}{}{\vspace*{-1ex}} % 略微上移标题
